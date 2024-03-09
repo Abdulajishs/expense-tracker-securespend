@@ -1,13 +1,10 @@
-import SignUpForm from "../components/SingUpForm";
+import LogInForm from "../components/Auth/LogInForm";
 
-
-const Login = () => {
+const LogIn = () =>{
     return (
         <>
-            <SignUpForm />
+        <LogInForm />
         </>
     )
 }
-
-export default Login;
-
+export default LogIn;

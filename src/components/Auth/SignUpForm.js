@@ -1,18 +1,21 @@
 import { useRef } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const cnfrmPasswordRef = useRef("");
 
-  const addUserHandler = async (email,password) => {
+  const history = useNavigate()
+
+  const addUserHandler = async (email, password) => {
     try {
       const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98", {
         method: "POST",
         body: JSON.stringify({
-          email : email,
-          password : password,
+          email: email,
+          password: password,
           returnSecureToken: true
         }),
         headers: {
@@ -39,16 +42,21 @@ const SignUpForm = () => {
     const password = passwordRef.current.value;
     const cnfrmPassword = cnfrmPasswordRef.current.value;
 
-    if(password !== cnfrmPassword){
+    if (password !== cnfrmPassword) {
       alert("Passwords doesn't match");
       return
     }
 
-    addUserHandler(email,password)
+    addUserHandler(email, password)
 
     emailRef.current.value = ""
     passwordRef.current.value = ""
     cnfrmPasswordRef.current.value = ""
+  }
+
+  const loginHandler = (event)=>{
+    event.preventDefault()
+    history("login")
   }
 
   return (
@@ -59,17 +67,17 @@ const SignUpForm = () => {
         label="Email address"
         className="mb-3"
       >
-        <Form.Control type="email" placeholder="name@example.com" ref={emailRef} required/>
+        <Form.Control type="email" placeholder="name@example.com" ref={emailRef} required />
       </FloatingLabel>
       <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-        <Form.Control type="password" placeholder="Password" ref={passwordRef} required/>
+        <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
       </FloatingLabel>
       <FloatingLabel controlId="floatingConfirmPassword" label="ConfirmPassword" className="mb-3">
-        <Form.Control type="password" placeholder="Confirm Password" ref={cnfrmPasswordRef} required/>
+        <Form.Control type="password" placeholder="Confirm Password" ref={cnfrmPasswordRef} required />
       </FloatingLabel>
       <Button variant="primary" className="mb-3" type="submit">Sign up</Button>
       <div>
-        <Button variant="outline-success" >Have an account? Login</Button>
+        <Button variant="outline-success" onClick={loginHandler} >Have an account? Login</Button>
       </div>
     </form>
 
