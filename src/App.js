@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Home from "./pages/Home";
+import UpdateProfile from "./pages/UpdateProfile";
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
     <Routes>
       <Route path="/" element={<SignUp />} />
       <Route path="login" element={<LogIn />} />
-      <Route path="home" element={<Home />} />
+      <Route path="home" exact element={<Home />} />
+      <Route path="home/update" exact element={<UpdateProfile/>} />
     </Routes>
     </>
   );

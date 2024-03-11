@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import TokenContext from "../../store/token-context";
 
 
 const LogInForm = () => {
@@ -8,6 +9,7 @@ const LogInForm = () => {
     const emailRef = useRef("")
     const passwordRef = useRef("")
 
+    const tokenCntx = useContext(TokenContext);
     const authHandler = async (email, password) => {
         try {
             const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98", {
@@ -24,9 +26,9 @@ const LogInForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                console.log(data);
+                // console.log(data);
                 history("/home")
-                localStorage.setItem("tokenId",data.idToken)
+                tokenCntx.addToken(data.idToken)
             } else {
                 throw new Error("Credentials Incorrect, Check Email or Password")
             }
@@ -54,10 +56,10 @@ const LogInForm = () => {
         <form onSubmit={submitHandler} className="d-flex flex-column justify-content-center align-items-center vh-100">
             <h2>Login</h2>
             <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
-                <Form.Control type="email" placeholder="name@example.com" ref={emailRef} />
+                <Form.Control type="email" placeholder="name@example.com" ref={emailRef} required/>
             </FloatingLabel>
             <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-                <Form.Control type="password" placeholder="Password" ref={passwordRef} />
+                <Form.Control type="password" placeholder="Password" ref={passwordRef} required/>
             </FloatingLabel>
 
             <Button variant="primary" className=" mb-3" type="submit" >Log In</Button>
