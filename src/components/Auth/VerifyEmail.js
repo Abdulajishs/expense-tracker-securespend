@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import TokenContext from "../../store/token-context"
+import { useNavigate } from "react-router-dom"
 
 const VerifyEmail = () => {
     const tokenCntx = useContext(TokenContext)
+    const history = useNavigate()
     const getOobConfirmationCode = async () => {
         try {
             const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98", {
@@ -13,9 +15,12 @@ const VerifyEmail = () => {
                     idToken: tokenCntx.idToken
                 })
             })
+            console.log(response);
             const data = await response.json()
             if (response.ok) {
                 console.log(data);
+                history("/home")
+
             } else {
                 throw new Error("Unable to verify")
             }
