@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import TokenContextProvider from './store/TokenContextProvider';
+import ExpenseContextProvider from './store/ExpenseContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ExpenseContextProvider>
       <TokenContextProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </TokenContextProvider>
+    </ExpenseContextProvider>
   </React.StrictMode>
 );
 
