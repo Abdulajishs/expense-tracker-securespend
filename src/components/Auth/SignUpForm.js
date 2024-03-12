@@ -26,7 +26,7 @@ const SignUpForm = () => {
       const data = await response.json()
       if (response.ok) {
         console.log(data);
-        console.log("User is successfully logged in");
+        console.log("User is successfully sign up");
       } else {
         throw new Error("Authentication is failed..")
       }

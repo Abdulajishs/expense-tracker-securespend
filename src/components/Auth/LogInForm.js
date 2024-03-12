@@ -27,7 +27,7 @@ const LogInForm = () => {
 
             if (response.ok) {
                 // console.log(data);
-                history("/home")
+                history("verify")
                 tokenCntx.addToken(data.idToken)
             } else {
                 throw new Error("Credentials Incorrect, Check Email or Password")
