@@ -10,11 +10,11 @@ import TokenContextProvider from './store/TokenContextProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <TokenContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </TokenContextProvider>
+      <TokenContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TokenContextProvider>
   </React.StrictMode>
 );
 

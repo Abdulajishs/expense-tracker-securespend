@@ -22,7 +22,7 @@ const TokenContextProvider = (props) =>{
         if (userIsLoggedIn) {
             timer =  setTimeout(() => {
                 removeTokenHandler()
-            }, 50000);
+            }, 3000000);
         }
         return ()=>clearTimeout(timer)
     },[userIsLoggedIn,removeTokenHandler])
@@ -35,7 +35,7 @@ const TokenContextProvider = (props) =>{
     }
     return(
         <>
-        {/* {console.log(tokenContext.tokenId)} */}
+        {console.log(tokenContext.tokenId)}
         <TokenContext.Provider value={tokenContext}>{props.children}</TokenContext.Provider>
         </>
     )
