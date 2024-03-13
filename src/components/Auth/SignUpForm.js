@@ -11,7 +11,7 @@ const SignUpForm = () => {
 
   const addUserHandler = async (email, password) => {
     try {
-      const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98", {
+      const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.API_KEY}`, {
         method: "POST",
         body: JSON.stringify({
           email: email,

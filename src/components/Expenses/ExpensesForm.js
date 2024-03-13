@@ -16,8 +16,8 @@ const ExpensesForm = () => {
             description: descriptionRef.current.value,
             category: categoryRef.current.value,
         }
-        expenseCntxt.addExpenses(expense)
-
+        // expenseCntxt.addExpenses(expense)
+        expenseCntxt.addExpensestoAPI(expense)
         amountRef.current.value=""
         descriptionRef.current.value =""
         categoryRef.current.value =""

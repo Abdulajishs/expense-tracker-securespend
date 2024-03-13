@@ -4,8 +4,7 @@ import { Container, Table } from "react-bootstrap";
 
 const ListExpense = () => {
     const { expenses } = useContext(ExpenseContext)
-    return (
-        
+    return (        
         <Container className="mt-3 p-5">
         <Table striped bordered hover>
             <thead>
@@ -16,7 +15,7 @@ const ListExpense = () => {
                 </tr>
             </thead>
             <tbody>
-                {expenses.map((item)=>(
+                {Object.values(expenses).map((item)=>(
                      <tr>
                      <td>{item.amount}</td>
                      <td>{item.description}</td>

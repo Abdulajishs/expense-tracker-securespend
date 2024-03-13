@@ -15,10 +15,10 @@ const VerifyEmail = () => {
                     idToken: tokenCntx.idToken
                 })
             })
-            console.log(response);
-            const data = await response.json()
+            // console.log(response);
+            // const data = await response.json()
             if (response.ok) {
-                console.log(data);
+                // console.log(data);
                 history("/home")
 
             } else {
