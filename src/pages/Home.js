@@ -1,13 +1,13 @@
 import ExpensesForm from "../components/Expenses/ExpensesForm"
-import ListExpense from "../components/Expenses/ListExpense"
 import IncompleteProfile from "../components/Profile/IncompleteProfile"
+import Expenses from "../components/Expenses/Expenses"
 
 const Home = () =>{
     return(
         <>
         <IncompleteProfile />
         <ExpensesForm />
-        <ListExpense />
+        <Expenses />
         </>
     )
 }

@@ -2,9 +2,11 @@ import React from "react"
 
 const ExpenseContext = React.createContext({
     expenses : [],
-    addExpenses : ()=>{},
-    addExpensestoAPI : ()=>{},
-    removeExpenses : ()=>{},
+    addExpensesToAPI : ()=>{},
+    getExpensesFromAPI : ()=>{},
+    deleteExpensesFromAPI : ()=>{},
+    itemToEdit : null,
+    setItemToEdit : ()=>{},
 })
 
 export default ExpenseContext

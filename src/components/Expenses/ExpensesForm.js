@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import ExpenseContext from "../../store/expense-context";
 
@@ -7,17 +7,27 @@ const ExpensesForm = () => {
     const descriptionRef = useRef("");
     const categoryRef = useRef("");
 
-    const expenseCntxt = useContext(ExpenseContext);
+    const {addExpensesToAPI,itemToEdit,setItemToEdit} = useContext(ExpenseContext);
+
+    useEffect(()=>{
+        if(itemToEdit){
+            amountRef.current.value=itemToEdit.amount
+            descriptionRef.current.value=itemToEdit.description
+            categoryRef.current.value=itemToEdit.category
+        }
+    },[itemToEdit])
 
     const submitHandler = (event) => {
         event.preventDefault()
         const expense = {
+            id : itemToEdit ? itemToEdit.id : null,
             amount: amountRef.current.value,
             description: descriptionRef.current.value,
             category: categoryRef.current.value,
         }
-        // expenseCntxt.addExpenses(expense)
-        expenseCntxt.addExpensestoAPI(expense)
+        addExpensesToAPI(expense)
+
+        setItemToEdit(null)
         amountRef.current.value=""
         descriptionRef.current.value =""
         categoryRef.current.value =""
@@ -46,7 +56,7 @@ const ExpensesForm = () => {
                     </Form.Group>
                 </Row>
                 <Button variant="primary" type="submit">
-                    Submit
+                    {itemToEdit? "Update" : "Submit"}
                 </Button>
             </Form>
         </Container>
