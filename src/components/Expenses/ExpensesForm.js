@@ -1,13 +1,19 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import ExpenseContext from "../../store/expense-context";
+import { useDispatch, useSelector } from "react-redux";
+import { saveExpenseToAPI, expenseAction, fetchExpensesFromAPI } from "../../store/expense";
 
 const ExpensesForm = () => {
     const amountRef = useRef("");
     const descriptionRef = useRef("");
     const categoryRef = useRef("");
 
-    const {addExpensesToAPI,itemToEdit,setItemToEdit} = useContext(ExpenseContext);
+    const dispatch = useDispatch()
+    const itemToEdit = useSelector(state => state.expenses.itemToEdit)
+
+    useEffect(()=>{
+        dispatch(fetchExpensesFromAPI())
+    },[dispatch])
 
     useEffect(()=>{
         if(itemToEdit){
@@ -25,9 +31,9 @@ const ExpensesForm = () => {
             description: descriptionRef.current.value,
             category: categoryRef.current.value,
         }
-        addExpensesToAPI(expense)
+        dispatch(saveExpenseToAPI(expense))
 
-        setItemToEdit(null)
+        dispatch(expenseAction.setItemToEdit())
         amountRef.current.value=""
         descriptionRef.current.value =""
         categoryRef.current.value =""
@@ -52,6 +58,7 @@ const ExpensesForm = () => {
                             <option>Food</option>
                             <option>Petrol</option>
                             <option>Salary</option>
+                            <option>Other</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>

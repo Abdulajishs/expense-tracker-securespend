@@ -5,19 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
-import TokenContextProvider from './store/TokenContextProvider';
-import ExpenseContextProvider from './store/ExpenseContextProvider';
+// import TokenContextProvider from './store/TokenContextProvider';
+// import ExpenseContextProvider from './store/ExpenseContextProvider';
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ExpenseContextProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+    {/* <ExpenseContextProvider>
       <TokenContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
       </TokenContextProvider>
-    </ExpenseContextProvider>
+    </ExpenseContextProvider> */}
   </React.StrictMode>
 );
 

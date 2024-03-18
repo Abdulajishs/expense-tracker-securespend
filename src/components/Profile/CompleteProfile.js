@@ -2,16 +2,16 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import url from "./url.jpg"
 import user from "./user.png"
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import TokenContext from "../../store/token-context";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 const CompleteProfile = () => {
     const [userInfo, setUserInfo] = useState({})
+    const tokenId = useSelector(state => state.token.tokenId)
 
     const nameRef = useRef("");
     const urlRef = useRef("");
-    const tokenCntx = useContext(TokenContext);
-    const tokenId = tokenCntx.idToken;
+
 
     const setAccountInfo  = async(name, url)=>{
         try {

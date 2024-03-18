@@ -1,18 +1,19 @@
-import { useContext } from "react";
 import { Button } from "react-bootstrap";
-import ExpenseContext from "../../store/expense-context";
+import { useDispatch } from "react-redux";
+import { deleteExpenseFromAPI, expenseAction } from "../../store/expense";
+
 
 const ListExpense = (props) => {
-    const { deleteExpensesFromAPI ,setItemToEdit } = useContext(ExpenseContext)
+    const dispatch = useDispatch()
     const { item } = props;
 
     const deleteHandler = (event) => {
         event.preventDefault()
-        deleteExpensesFromAPI(item)
+        dispatch(deleteExpenseFromAPI(item.id))
     }
     const editHandler = (event) =>{
         event.preventDefault()
-        setItemToEdit(item)
+        dispatch(expenseAction.setItemToEdit(item))
     }
     return (
         <tr key={item.id}>

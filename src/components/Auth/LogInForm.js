@@ -1,8 +1,8 @@
-import { useContext, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import TokenContext from "../../store/token-context";
-
+import { useDispatch } from "react-redux";
+import {tokenAction} from "../../store/token";
 
 const LogInForm = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -10,7 +10,7 @@ const LogInForm = () => {
     const emailRef = useRef("")
     const passwordRef = useRef("")
 
-    const tokenCntx = useContext(TokenContext);
+    const dispatch = useDispatch()
     const authHandler = async (email, password) => {
         try {
             const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98", {
@@ -28,8 +28,9 @@ const LogInForm = () => {
 
             if (response.ok) {
                 // console.log(data);
-                history("verify")
-                tokenCntx.addToken(data.idToken)
+                // history("verify")
+                history("/home")
+                dispatch(tokenAction.addtoken(data.idToken))
             } else {
                 throw new Error("Credentials Incorrect, Check Email or Password")
             }

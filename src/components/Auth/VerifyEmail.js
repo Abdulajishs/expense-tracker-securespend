@@ -1,10 +1,10 @@
-import { useContext } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
-import TokenContext from "../../store/token-context"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 const VerifyEmail = () => {
-    const tokenCntx = useContext(TokenContext)
+    const token = useSelector(state => state.token.idToken)
+    console.log(token);
     const history = useNavigate()
     const getOobConfirmationCode = async () => {
         try {
@@ -12,7 +12,7 @@ const VerifyEmail = () => {
                 method: "POST",
                 body: JSON.stringify({
                     requestType: "VERIFY_EMAIL",
-                    idToken: tokenCntx.idToken
+                    idToken: token
                 })
             })
             // console.log(response);
