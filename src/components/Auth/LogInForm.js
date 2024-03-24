@@ -2,7 +2,7 @@ import {  useRef, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {tokenAction} from "../../store/token";
+import {tokenAction} from "../../store/token-slice";
 
 const LogInForm = () => {
     const [isLoading, setIsLoading] = useState(false)

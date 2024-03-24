@@ -9,7 +9,7 @@ const Expenses = () => {
     const expenses = useSelector(state => state.expenses.expenses)
     const [addtionalFeatures,setAddtionalFeatures] = useState(false)
 
-    // console.log(expenses)
+    console.log(expenses)
     const total = expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
 
     const activatePremiumHandler = () => {
@@ -31,7 +31,7 @@ const Expenses = () => {
                     </thead>
                     <tbody>
                         {expenses.map((item) => (
-                            <ListExpense item={item} />
+                            <ListExpense item={item} key={item.id}/>
                         ))}
                     </tbody>
                 </Table>

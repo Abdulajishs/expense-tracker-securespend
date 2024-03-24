@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { deleteExpenseFromAPI, expenseAction } from "../../store/expense";
+import { expenseAction } from "../../store/expense-slice";
+import { deleteExpenseInAPI } from "../../store/expense-actions";
 
 
 const ListExpense = (props) => {
@@ -9,14 +10,14 @@ const ListExpense = (props) => {
 
     const deleteHandler = (event) => {
         event.preventDefault()
-        dispatch(deleteExpenseFromAPI(item.id))
-    }
+        dispatch(deleteExpenseInAPI(item.id))
+        }
     const editHandler = (event) =>{
         event.preventDefault()
         dispatch(expenseAction.setItemToEdit(item))
     }
     return (
-        <tr key={item.id}>
+        <tr >
             <td>{item.amount}</td>
             <td>{item.description}</td>
             <td>{item.category}</td>

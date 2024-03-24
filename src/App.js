@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
@@ -9,12 +10,17 @@ import Verification from "./pages/Verification";
 import RootLayout from "./components/MainNavigation/RootLayout";
 
 import classes from "./App.module.css";
+import { fetchExpenses } from "./store/expense-actions";
 
 
 
 function App() {
   const mode = useSelector(state => state.theme.mode)
+  const dispatch = useDispatch()
 
+  useEffect(()=>{
+    dispatch(fetchExpenses())
+  },[dispatch])
   
   return (
     <>

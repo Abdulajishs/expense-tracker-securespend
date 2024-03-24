@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { themeAction } from "../../store/theme";
+import { themeAction } from "../../store/theme-slice";
 import { Button } from "react-bootstrap";
 
 const PremiumFeatures = () =>{
@@ -11,10 +11,8 @@ const PremiumFeatures = () =>{
         dispatch(themeAction.switchTheme());
     }
 
-    // const blob = new Blob([expense]);
-    // const url = URL.createObjectURL(blob);
-
     const convertToCSV  = (data) => {
+        console.log(data.map(expense => Object.values(expense).join(",")));
         return data.map(expense => Object.values(expense).join(",")).join("\n");
     }
     const downloadHandler = ()=>{

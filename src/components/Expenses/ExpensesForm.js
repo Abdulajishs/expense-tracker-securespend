@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { saveExpenseToAPI, expenseAction, fetchExpensesFromAPI } from "../../store/expense";
+import { expenseAction } from "../../store/expense-slice";
+import { saveExpenseToAPI } from "../../store/expense-actions";
 
 const ExpensesForm = () => {
     const amountRef = useRef("");
@@ -11,17 +12,14 @@ const ExpensesForm = () => {
     const dispatch = useDispatch()
     const itemToEdit = useSelector(state => state.expenses.itemToEdit)
 
-    useEffect(()=>{
-        dispatch(fetchExpensesFromAPI())
-    },[dispatch])
 
-    useEffect(()=>{
-        if(itemToEdit){
-            amountRef.current.value=itemToEdit.amount
-            descriptionRef.current.value=itemToEdit.description
-            categoryRef.current.value=itemToEdit.category
+    useEffect(() => {
+        if (itemToEdit) {
+            amountRef.current.value = itemToEdit.amount
+            descriptionRef.current.value = itemToEdit.description
+            categoryRef.current.value = itemToEdit.category
         }
-    },[itemToEdit])
+    }, [itemToEdit])
 
     const submitHandler = (event) => {
         event.preventDefault()
@@ -34,14 +32,19 @@ const ExpensesForm = () => {
         dispatch(saveExpenseToAPI(expense))
 
         dispatch(expenseAction.setItemToEdit())
-        amountRef.current.value=""
-        descriptionRef.current.value =""
-        categoryRef.current.value =""
+        amountRef.current.value = ""
+        descriptionRef.current.value = ""
+        categoryRef.current.value = ""
     }
     return (
         <Container>
             <Form onSubmit={submitHandler}>
                 <Row className="mb-3">
+                    {/* <Form.Group as={Col} controlId="formGridAmount">
+                        <Form.Label>Id</Form.Label>
+                        <Form.Control type="number" placeholder="Enter Amount" ref={idRef} required />
+                    </Form.Group> */}
+
                     <Form.Group as={Col} controlId="formGridAmount">
                         <Form.Label>Amount</Form.Label>
                         <Form.Control type="number" placeholder="Enter Amount" ref={amountRef} required />
@@ -63,7 +66,7 @@ const ExpensesForm = () => {
                     </Form.Group>
                 </Row>
                 <Button variant="primary" type="submit">
-                    {itemToEdit? "Update" : "Submit"}
+                    {itemToEdit ? "Update" : "Submit"}
                 </Button>
             </Form>
         </Container>
