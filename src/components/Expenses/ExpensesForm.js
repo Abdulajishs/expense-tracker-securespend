@@ -12,6 +12,8 @@ const ExpensesForm = () => {
     const dispatch = useDispatch()
     const itemToEdit = useSelector(state => state.expenses.itemToEdit)
 
+    const userId = useSelector(state => state.token.userId)
+
 
     useEffect(() => {
         if (itemToEdit) {
@@ -29,7 +31,7 @@ const ExpensesForm = () => {
             description: descriptionRef.current.value,
             category: categoryRef.current.value,
         }
-        dispatch(saveExpenseToAPI(expense))
+        dispatch(saveExpenseToAPI(expense,userId))
 
         dispatch(expenseAction.setItemToEdit())
         amountRef.current.value = ""
@@ -40,11 +42,6 @@ const ExpensesForm = () => {
         <Container>
             <Form onSubmit={submitHandler}>
                 <Row className="mb-3">
-                    {/* <Form.Group as={Col} controlId="formGridAmount">
-                        <Form.Label>Id</Form.Label>
-                        <Form.Control type="number" placeholder="Enter Amount" ref={idRef} required />
-                    </Form.Group> */}
-
                     <Form.Group as={Col} controlId="formGridAmount">
                         <Form.Label>Amount</Form.Label>
                         <Form.Control type="number" placeholder="Enter Amount" ref={amountRef} required />

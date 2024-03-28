@@ -15,12 +15,14 @@ import { fetchExpenses } from "./store/expense-actions";
 
 
 function App() {
-  const mode = useSelector(state => state.theme.mode)
+  const mode = useSelector(state => state.theme.mode);
+  const userId = useSelector(state => state.token.userId);
+  console.log(userId);
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(fetchExpenses())
-  },[dispatch])
+    dispatch(fetchExpenses(userId))
+  },[dispatch,userId])
   
   return (
     <>

@@ -30,7 +30,7 @@ describe("LogInForm Component", () => {
     test("render email and password ", () => {
         render(
             <LogInForm />
-        )
+        ) 
 
         const emailInput = screen.getByPlaceholderText("name@example.com");
         const passwordInput = screen.getByPlaceholderText("Password");

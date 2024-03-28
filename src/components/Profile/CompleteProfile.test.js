@@ -3,6 +3,7 @@ import CompleteProfile from "./CompleteProfile";
 import { Provider } from "react-redux";
 import store from "../../store";
 import { MemoryRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 const render = component => rtlRender(
     <Provider store={store}>
@@ -24,6 +25,14 @@ describe("CompleteProfile Component", () => {
     const contactDetailsHeader = screen.getByText("Contact Details");
     expect(contactDetailsHeader).toBeInTheDocument();
   });
+
+  test("render interaction of update button",()=>{
+    render(<CompleteProfile />);
+    const buttonElement = screen.getByRole("button")
+    userEvent.click(buttonElement)
+
+    // expect()
+  })
 
 
 });

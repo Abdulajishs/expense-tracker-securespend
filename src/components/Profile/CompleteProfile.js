@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const CompleteProfile = () => {
     const [userInfo, setUserInfo] = useState({})
-    const tokenId = useSelector(state => state.token.tokenId)
+    const tokenId = useSelector(state => state.token.idToken)
 
     const nameRef = useRef("");
     const urlRef = useRef("");
@@ -39,8 +39,8 @@ const CompleteProfile = () => {
 
     const getAccountInfo = useCallback (async (tokenId) => {
         try {
-            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98', {
-                method: "POST",
+            // console.log(tokenId);
+            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDxa2jQeSZwOU10O-lyyAtX2ncRc50xL98', {               method: "POST",
                 body: JSON.stringify({
                     idToken: tokenId
                 }),

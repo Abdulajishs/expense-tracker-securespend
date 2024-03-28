@@ -31,6 +31,9 @@ const LogInForm = () => {
                 // history("verify")
                 history("/home")
                 dispatch(tokenAction.addtoken(data.idToken))
+                const userId = email.replace(/\./g,"")
+                console.log(userId);
+                dispatch(tokenAction.addUserId(userId))
             } else {
                 throw new Error("Credentials Incorrect, Check Email or Password")
             }
@@ -43,6 +46,8 @@ const LogInForm = () => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value
+
+       
 
         authHandler(email, password)
 

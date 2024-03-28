@@ -1,12 +1,9 @@
-// import { useContext } from "react";
 import { Button } from "react-bootstrap";
-// import TokenContext from "../../store/token-context";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { tokenAction } from "../../store/token-slice";
 
 const MainNavigation = () =>{
-    // const tokenCntx = useContext(TokenContext);
     const dispatch = useDispatch()
 
     const history = useNavigate();
@@ -14,7 +11,7 @@ const MainNavigation = () =>{
     const logOutHandler = (event)=>{
         event.preventDefault()
         dispatch(tokenAction.removetoken())
-        // tokenCntx.removeToken()
+        dispatch(tokenAction.removeUserId())
         history("login")
     }
     return (

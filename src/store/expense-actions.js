@@ -1,10 +1,12 @@
 import axios from "axios";
 import { expenseAction } from "./expense-slice";
 
-export const fetchExpenses = () => {
+export const fetchExpenses = (userId) => {
     return async (dispatch) => {
+        console.log(userId);
         const sendRequest = async () => {
-            const response = await axios.get("https://expense-tracker-http-default-rtdb.firebaseio.com/expense.json");
+            const response = await axios.get(`https://expense-tracker-http-default-rtdb.firebaseio.com/${userId}/expense.json`);
+            // console.log(response.data);
             if (response.status === 200) {
                 const data = response.data;
                 if (data) {
@@ -28,15 +30,14 @@ export const fetchExpenses = () => {
     }
 }
 
-export const saveExpenseToAPI = (item) => {
+export const saveExpenseToAPI = (item,userId) => {
     return async (dispatch) => {
         const sendRequest = async (item) => {
-           
             console.log(item.id);
             if (item.id) {
                 try {
                     const response = await axios.put(
-                        `https://expense-tracker-http-default-rtdb.firebaseio.com/expense/${item.id}.json`,
+                        `https://expense-tracker-http-default-rtdb.firebaseio.com/${userId}/expense/${item.id}.json`,
                         item
                     )
                     if (response.status === 200) {
@@ -52,7 +53,7 @@ export const saveExpenseToAPI = (item) => {
             } else {
                 try {
                     const response = await axios.post(
-                        "https://expense-tracker-http-default-rtdb.firebaseio.com/expense.json",
+                        `https://expense-tracker-http-default-rtdb.firebaseio.com/${userId}/expense.json`,
                         item
                     );
                     console.log(response.data);
@@ -71,11 +72,11 @@ export const saveExpenseToAPI = (item) => {
 }
 
 
-export const deleteExpenseInAPI = (id) => {
+export const deleteExpenseInAPI = (id,userId) => {
     return async (dispatch) => {
         const sendRequest = async (id) => {
             try {
-                const response = await axios.delete(`https://expense-tracker-http-default-rtdb.firebaseio.com/expense/${id}.json`);
+                const response = await axios.delete(`https://expense-tracker-http-default-rtdb.firebaseio.com/${userId}/expense/${id}.json`);
                 if (response.status === 200) {
                     return dispatch(expenseAction.deleteExpense(id))
                 } else {

@@ -1,16 +1,17 @@
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { expenseAction } from "../../store/expense-slice";
 import { deleteExpenseInAPI } from "../../store/expense-actions";
 
 
 const ListExpense = (props) => {
+    const userId = useSelector(state => state.token.userId)
     const dispatch = useDispatch()
     const { item } = props;
 
     const deleteHandler = (event) => {
         event.preventDefault()
-        dispatch(deleteExpenseInAPI(item.id))
+        dispatch(deleteExpenseInAPI(item.id,userId))
         }
     const editHandler = (event) =>{
         event.preventDefault()
